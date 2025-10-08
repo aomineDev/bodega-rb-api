@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-BodegaRbApiApplication<bodega-rb-api>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "pe.edu.utp.bodega_rb_api.BodegaRbApiApplication",
+      "projectName": "bodega-rb-api",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
