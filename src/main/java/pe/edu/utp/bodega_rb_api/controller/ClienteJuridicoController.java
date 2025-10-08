@@ -14,35 +14,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import pe.edu.utp.bodega_rb_api.model.Boleta;
-import pe.edu.utp.bodega_rb_api.service.BoletaService;
+import pe.edu.utp.bodega_rb_api.model.ClienteJuridico;
+import pe.edu.utp.bodega_rb_api.service.ClienteJuridicoService;
 
 @RestController
-@RequestMapping("/api/boletas")
-public class BoletaController {
+@RequestMapping("/api/clientes-juridicos")
+public class ClienteJuridicoController {
   @Autowired
-  BoletaService service;
+  ClienteJuridicoService service;
 
   @GetMapping
-  public ResponseEntity<List<Boleta>> findAll() {
+  public ResponseEntity<List<ClienteJuridico>> findAll() {
     return ResponseEntity.ok(service.findAll());
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Boleta> findById(@PathVariable Integer id) {
+  public ResponseEntity<ClienteJuridico> findById(@PathVariable Integer id) {
     return service.findById(id)
         .map(ResponseEntity::ok)
         .orElseGet(() -> ResponseEntity.notFound().build());
   }
 
   @PostMapping
-  public ResponseEntity<Boleta> save(@RequestBody Boleta boleta) {
-    return ResponseEntity.status(HttpStatus.CREATED).body(service.save(boleta));
+  public ResponseEntity<ClienteJuridico> save(@RequestBody ClienteJuridico clienteJuridico) {
+    return ResponseEntity.status(HttpStatus.CREATED).body(service.save(clienteJuridico));
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<Boleta> update(@PathVariable Integer id, @RequestBody Boleta boleta) {
-    return ResponseEntity.ok(service.save(boleta));
+  public ResponseEntity<ClienteJuridico> update(@PathVariable Integer id,
+      @RequestBody ClienteJuridico clienteJuridico) {
+    return ResponseEntity.ok(service.save(clienteJuridico));
   }
 
   @DeleteMapping("/{id}")
