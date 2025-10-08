@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "personas_juridicas")
 public class PersonaJuridica extends Persona {
-  @Column(name = "ruc", nullable = false, columnDefinition = "CHAR(11)")
+  @Column(name = "ruc", unique = true, nullable = false, columnDefinition = "CHAR(11)")
   private String ruc;
 
   @Column(name = "razon_social", nullable = false, length = 100)
