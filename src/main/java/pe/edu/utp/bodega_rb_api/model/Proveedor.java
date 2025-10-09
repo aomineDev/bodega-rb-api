@@ -1,0 +1,23 @@
+package pe.edu.utp.bodega_rb_api.model;
+
+import java.time.LocalDate;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "proveedores")
+public class Proveedor extends PersonaJuridica {
+
+  @Column(name = "fecha_registro", nullable = false)
+  private LocalDate fechaRegistro;
+}
