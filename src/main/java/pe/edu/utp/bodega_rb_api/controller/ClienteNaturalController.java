@@ -14,35 +14,35 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import pe.edu.utp.bodega_rb_api.model.Boleta;
-import pe.edu.utp.bodega_rb_api.service.BoletaService;
+import pe.edu.utp.bodega_rb_api.model.ClienteNatural;
+import pe.edu.utp.bodega_rb_api.service.ClienteNaturalService;
 
 @RestController
-@RequestMapping("/api/boletas")
-public class BoletaController {
+@RequestMapping("/api/clientes-naturales")
+public class ClienteNaturalController {
   @Autowired
-  BoletaService service;
+  ClienteNaturalService service;
 
   @GetMapping
-  public ResponseEntity<List<Boleta>> findAll() {
+  public ResponseEntity<List<ClienteNatural>> findAll() {
     return ResponseEntity.ok(service.findAll());
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Boleta> findById(@PathVariable Integer id) {
+  public ResponseEntity<ClienteNatural> findById(@PathVariable Integer id) {
     return service.findById(id)
         .map(ResponseEntity::ok)
         .orElseGet(() -> ResponseEntity.notFound().build());
   }
 
   @PostMapping
-  public ResponseEntity<Boleta> save(@RequestBody Boleta boleta) {
-    return ResponseEntity.status(HttpStatus.CREATED).body(service.save(boleta));
+  public ResponseEntity<ClienteNatural> save(@RequestBody ClienteNatural clienteNatural) {
+    return ResponseEntity.status(HttpStatus.CREATED).body(service.save(clienteNatural));
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<Boleta> update(@PathVariable Integer id, @RequestBody Boleta boleta) {
-    return ResponseEntity.ok(service.save(boleta));
+  public ResponseEntity<ClienteNatural> update(@PathVariable Integer id, @RequestBody ClienteNatural clienteNatural) {
+    return ResponseEntity.ok(service.save(clienteNatural));
   }
 
   @DeleteMapping("/{id}")
