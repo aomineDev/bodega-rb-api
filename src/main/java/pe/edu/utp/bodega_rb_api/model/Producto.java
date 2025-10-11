@@ -27,7 +27,7 @@ import lombok.Setter;
 public class Producto {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(table = "producto_id")
+  @Column(name = "producto_id")
   private Integer productoId;
 
   // @ManyToOne
