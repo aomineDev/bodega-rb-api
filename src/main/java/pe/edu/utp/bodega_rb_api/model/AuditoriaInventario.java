@@ -12,7 +12,6 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-@Table(name = "auditorias_inventario")
 @Getter
 @Table(name = "auditorias_inventario")
 @Setter
