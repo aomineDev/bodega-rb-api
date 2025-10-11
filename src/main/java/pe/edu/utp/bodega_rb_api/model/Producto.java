@@ -64,6 +64,7 @@ public class Producto {
   @Column(name = "stock")
   private Integer stock;
 
+  // La unidad de medida es ENUM no string
   @Column(name = "unidad_medida", nullable = false, length = 10)
   private String unidadMedida;
 

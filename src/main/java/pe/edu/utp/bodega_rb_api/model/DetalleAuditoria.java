@@ -22,7 +22,4 @@ public class DetalleAuditoria {
   private Integer diferencia;
   private String observaciones;
 
-  @ManyToOne
-  @JoinColumn(name = "auditoria_inventario_id", nullable = false)
-  private AuditoriaInventario auditoriaInventario;
 }

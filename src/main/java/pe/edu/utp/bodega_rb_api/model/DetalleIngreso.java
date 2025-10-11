@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDate;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 @Entity
 @Table(name = "detalles_ingresos")
 @Getter
@@ -11,16 +14,15 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DetalleIngreso {
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "detalle_ingreso_id")
   private Integer detalleIngresoId;
 
-  @Column(nullable = false, length = 20)
+  @Column(name = "lote", nullable = false, length = 20)
   private String lote;
 
-  @Column(nullable = false)
+  @Column(name = "cantidad", nullable = false)
   private Integer cantidad;
 
   @Column(name = "precio_compra", nullable = false)
@@ -28,15 +30,12 @@ public class DetalleIngreso {
 
   @ManyToOne
   @JoinColumn(name = "producto_id", nullable = false)
+  @OnDelete(action = OnDeleteAction.SET_NULL)
   private Producto producto;
 
-  @Column(name = "fecha_produccion")
+  @Column(name = "fecha_produccion", nullable = false)
   private LocalDate fechaProduccion;
 
-  @Column(name = "fecha_vencimiento")
+  @Column(name = "fecha_vencimiento", nullable = false)
   private LocalDate fechaVencimiento;
-
-  @ManyToOne
-  @JoinColumn(name = "ingreso_producto_id", nullable = false)
-  private IngresoProducto ingresoProducto;
 }

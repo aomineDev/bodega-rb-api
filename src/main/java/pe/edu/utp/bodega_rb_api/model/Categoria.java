@@ -15,9 +15,9 @@ public class Categoria {
   @Column(name = "categoria_id")
   private Integer categoriaId;
 
-  @Column(nullable = false, unique = true, length = 50)
+  @Column(name = "nombre", nullable = false, unique = true, length = 50)
   private String nombre;
 
-  @Column(length = 200)
+  @Column(name = "descripcion", length = 200, nullable = false)
   private String descripcion;
 }
