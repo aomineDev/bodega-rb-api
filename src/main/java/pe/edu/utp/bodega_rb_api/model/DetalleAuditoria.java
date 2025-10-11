@@ -28,7 +28,7 @@ public class DetalleAuditoria {
   @Column(name = "diferencia", nullable = false)
   private Integer diferencia;
 
-  @Column(name = "observaciones", nullable = true)
+  @Column(name = "observaciones", length = 100)
   private String observaciones;
 
 }
