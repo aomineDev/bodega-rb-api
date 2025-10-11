@@ -14,13 +14,18 @@ import org.hibernate.annotations.OnDeleteAction;
 @Entity
 @Table(name = "auditorias_inventario")
 @Getter
+@Table(name = "auditorias_inventario")
 @Setter
 public class AuditoriaInventario {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "auditoria_inventario_id", nullable = false)
   private Integer auditoriaInventarioId;
 
+  @Column(name = "fecha_auditoria", nullable = false)
   private LocalDate fechaAuditoria;
+
+  @Column(name = "hora_auditoria", nullable = false)
   private LocalTime horaAuditoria;
 
   @ManyToOne
