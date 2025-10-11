@@ -1,38 +1,37 @@
 package pe.edu.utp.bodega_rb_api.service.impl;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import pe.edu.utp.bodega_rb_api.model.DetalleAuditoria;
 import pe.edu.utp.bodega_rb_api.repository.DetalleAuditoriaRepository;
 import pe.edu.utp.bodega_rb_api.service.DetalleAuditoriaService;
 
-import java.util.List;
-import java.util.Optional;
-
 @Service
 public class DetalleAuditoriaServiceImpl implements DetalleAuditoriaService {
+  @Autowired
+  private DetalleAuditoriaRepository repository;
 
-    @Autowired
-    private DetalleAuditoriaRepository detalleAuditoriaRepository;
+  @Override
+  public List<DetalleAuditoria> findAll() {
+    return repository.findAll();
+  }
 
-    @Override
-    public DetalleAuditoria save(DetalleAuditoria detalleAuditoria) {
-        return detalleAuditoriaRepository.save(detalleAuditoria);
-    }
+  @Override
+  public Optional<DetalleAuditoria> findById(Integer id) {
+    return repository.findById(id);
+  }
 
-    @Override
-    public List<DetalleAuditoria> findAll() {
-        return detalleAuditoriaRepository.findAll();
-    }
+  @Override
+  public DetalleAuditoria save(DetalleAuditoria entity) {
+    return repository.save(entity);
+  }
 
-    @Override
-    public DetalleAuditoria findById(Integer id) {
-        Optional<DetalleAuditoria> detalle = detalleAuditoriaRepository.findById(id);
-        return detalle.orElse(null);
-    }
-
-    @Override
-    public void deleteById(Integer id) {
-        detalleAuditoriaRepository.deleteById(id);
-    }
+  @Override
+  public void deleteById(Integer id) {
+    repository.deleteById(id);
+  }
 }
