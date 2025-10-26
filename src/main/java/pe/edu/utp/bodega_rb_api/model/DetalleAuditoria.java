@@ -1,13 +1,18 @@
 package pe.edu.utp.bodega_rb_api.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
-@Getter
-@Table(name = "detalles_auditoria")
 @Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+
+@Entity
+@Table(name = "detalles_auditoria")
 public class DetalleAuditoria {
 
   @Id

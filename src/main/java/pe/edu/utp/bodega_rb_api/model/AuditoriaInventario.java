@@ -1,7 +1,9 @@
 package pe.edu.utp.bodega_rb_api.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
@@ -15,6 +17,8 @@ import org.hibernate.annotations.OnDeleteAction;
 @Getter
 @Table(name = "auditorias_inventario")
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class AuditoriaInventario {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
