@@ -36,7 +36,7 @@ public abstract class Comprobante {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "comprobante_id")
-  protected Integer comprobanteId;
+  protected Integer id;
 
   @Column(name = "fecha", nullable = false)
   protected LocalDate fecha;

@@ -28,7 +28,7 @@ public class Producto {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "producto_id")
-  private Integer productoId;
+  private Integer id;
 
   // @ManyToOne
   // @JoinColumn(name = "categoria_id")
@@ -46,7 +46,7 @@ public class Producto {
   @Column(name = "nombre", unique = true, nullable = false, length = 20)
   private String nombre;
 
-  @Column(name = "descripcion", nullable = false, length = 50)
+  @Column(name = "descripcion", length = 50)
   private String descripcion;
 
   @Column(name = "precio_unitario", nullable = false)
@@ -64,11 +64,10 @@ public class Producto {
   @Column(name = "stock")
   private Integer stock;
 
-  // La unidad de medida es ENUM no string
   @Column(name = "unidad_medida", nullable = false, length = 10)
   private String unidadMedida;
 
-  @Column(name = "imagen", nullable = false, length = 100)
+  @Column(name = "imagen", length = 100)
   private String imagen;
 
 }

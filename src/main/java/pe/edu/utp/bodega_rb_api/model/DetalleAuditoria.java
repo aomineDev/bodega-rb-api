@@ -13,7 +13,7 @@ public class DetalleAuditoria {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "detalle_auditoria_id", nullable = false)
-  private Integer detalleAuditoriaId;
+  private Integer id;
 
   @ManyToOne
   @JoinColumn(name = "producto_id", nullable = false)
@@ -25,10 +25,10 @@ public class DetalleAuditoria {
   @Column(name = "stock_fisico", nullable = false)
   private Integer stockFisico;
 
-  @Column(name = "diferencia", nullable = false)
+  @Column(name = "diferencia")
   private Integer diferencia;
 
-  @Column(name = "observaciones", length = 100)
+  @Column(name = "observaciones")
   private String observaciones;
 
 }

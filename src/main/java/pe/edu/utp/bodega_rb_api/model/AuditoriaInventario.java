@@ -19,7 +19,7 @@ public class AuditoriaInventario {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "auditoria_inventario_id", nullable = false)
-  private Integer auditoriaInventarioId;
+  private Integer id;
 
   @Column(name = "fecha_auditoria", nullable = false)
   private LocalDate fechaAuditoria;

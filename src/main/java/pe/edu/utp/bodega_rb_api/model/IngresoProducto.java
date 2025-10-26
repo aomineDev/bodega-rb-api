@@ -19,7 +19,7 @@ public class IngresoProducto {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "ingreso_producto_id")
-  private Integer ingresoProductoId;
+  private Integer id;
 
   @ManyToOne
   @JoinColumn(name = "asistente_almacen_id")
@@ -37,7 +37,7 @@ public class IngresoProducto {
   @Column(name = "hora_ingreso", nullable = false)
   private LocalTime horaIngreso;
 
-  @Column(name = "estado", nullable = false, length = 30)
+  @Column(name = "estado", length = 50)
   private String estado;
 
   @ManyToOne

@@ -17,7 +17,7 @@ public class DetalleIngreso {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "detalle_ingreso_id")
-  private Integer detalleIngresoId;
+  private Integer id;
 
   @Column(name = "lote", nullable = false, length = 20)
   private String lote;

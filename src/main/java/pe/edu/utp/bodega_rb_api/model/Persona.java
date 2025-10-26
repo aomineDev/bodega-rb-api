@@ -25,14 +25,14 @@ public abstract class Persona {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "persona_id")
-  protected Integer personaId;
+  protected Integer id;
 
-  @Column(name = "direccion", nullable = false, length = 70)
+  @Column(name = "direccion", length = 70)
   protected String direccion;
 
-  @Column(name = "telefono", unique = true, nullable = false, columnDefinition = "CHAR(9)")
+  @Column(name = "telefono", unique = true, columnDefinition = "CHAR(9)")
   protected String telefono;
 
-  @Column(name = "email", unique = true, nullable = false, length = 100)
+  @Column(name = "email", unique = true, length = 100)
   protected String email;
 }

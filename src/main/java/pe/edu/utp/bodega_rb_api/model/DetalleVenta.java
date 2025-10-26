@@ -18,7 +18,7 @@ public class DetalleVenta {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "detalle_venta_id")
-  private Integer detalleVentaId;
+  private Integer id;
 
   @Column(name = "cantidad", nullable = false)
   private Double cantidad;

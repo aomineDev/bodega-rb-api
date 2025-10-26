@@ -22,10 +22,10 @@ import lombok.Setter;
 @Table(name = "empleado")
 public class Empleado extends PersonaNatural {
 
-  @Column(name = "clave", nullable = false, length = 30)
+  @Column(name = "clave", nullable = false, length = 70)
   private String clave;
 
-  @Column(name = "imagen", nullable = false, length = 100)
+  @Column(name = "imagen")
   private String imagen;
 
   @ManyToOne
