@@ -42,6 +42,7 @@ public class ClienteNaturalController {
 
   @PutMapping("/{id}")
   public ResponseEntity<ClienteNatural> update(@PathVariable Integer id, @RequestBody ClienteNatural clienteNatural) {
+    clienteNatural.setId(id);
     return ResponseEntity.ok(service.save(clienteNatural));
   }
 

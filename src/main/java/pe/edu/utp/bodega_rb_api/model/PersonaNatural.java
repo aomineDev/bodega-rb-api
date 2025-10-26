@@ -19,7 +19,7 @@ import lombok.Setter;
 @Table(name = "personas_naturales")
 public class PersonaNatural extends Persona {
   @Column(name = "dni", unique = true, nullable = false, columnDefinition = "CHAR(8)")
-  private char dni;
+  private String dni;
 
   @Column(name = "nombre", nullable = false, length = 50)
   private String nombre;
