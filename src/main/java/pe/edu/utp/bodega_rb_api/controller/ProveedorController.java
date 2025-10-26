@@ -42,6 +42,7 @@ public class ProveedorController {
 
   @PutMapping("/{id}")
   public ResponseEntity<Proveedor> update(@PathVariable Integer id, @RequestBody Proveedor proveedor) {
+    proveedor.setId(id);
     return ResponseEntity.ok(service.save(proveedor));
   }
 

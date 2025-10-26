@@ -42,6 +42,7 @@ public class EmpleadoController {
 
   @PutMapping("/{id}")
   public ResponseEntity<Empleado> update(@PathVariable Integer id, @RequestBody Empleado entity) {
+    entity.setId(id);
     return ResponseEntity.ok(service.save(entity));
   }
 
