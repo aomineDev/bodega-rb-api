@@ -33,7 +33,8 @@ public class StorageController {
     Files.createDirectories(path.getParent());
     Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 
-    return ResponseEntity.ok("/" + destiny + filename);
+    String baseUrl = "http://localhost:8080/";
+    return ResponseEntity.ok(baseUrl + destiny + filename);
 
   }
 
