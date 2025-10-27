@@ -32,7 +32,7 @@ public class Producto {
 
   @ManyToOne
   @JoinColumn(name = "categoria_id")
-  @OnDelete(action = OnDeleteAction.CASCADE)
+  @OnDelete(action = OnDeleteAction.RESTRICT)
   private Categoria categoria;
 
   @ManyToOne
