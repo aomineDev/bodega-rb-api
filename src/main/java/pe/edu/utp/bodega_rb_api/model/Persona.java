@@ -27,12 +27,12 @@ public abstract class Persona {
   @Column(name = "persona_id")
   protected Integer id;
 
-  @Column(name = "direccion", length = 70)
+  @Column(name = "direccion", length = 70, nullable = true)
   protected String direccion;
 
-  @Column(name = "telefono", unique = true, columnDefinition = "CHAR(9)")
+  @Column(name = "telefono", unique = true, columnDefinition = "CHAR(9)", nullable = true)
   protected String telefono;
 
-  @Column(name = "email", unique = true, length = 100)
+  @Column(name = "email", unique = true, length = 100, nullable = true)
   protected String email;
 }
