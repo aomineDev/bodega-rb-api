@@ -30,10 +30,10 @@ public class Producto {
   @Column(name = "producto_id")
   private Integer id;
 
-  // @ManyToOne
-  // @JoinColumn(name = "categoria_id")
-  // @OnDelete(action = OnDeleteAction.RESTRICT)
-  // private Categoria categoria;
+  @ManyToOne
+  @JoinColumn(name = "categoria_id")
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  private Categoria categoria;
 
   @ManyToOne
   @JoinColumn(name = "proveedor_id")
@@ -43,10 +43,10 @@ public class Producto {
   @Column(name = "codigo_barra", unique = true)
   private String codigoBarra;
 
-  @Column(name = "nombre", unique = true, nullable = false, length = 20)
+  @Column(name = "nombre", unique = true, nullable = false, length = 50)
   private String nombre;
 
-  @Column(name = "descripcion", length = 50)
+  @Column(name = "descripcion")
   private String descripcion;
 
   @Column(name = "precio_unitario", nullable = false)
