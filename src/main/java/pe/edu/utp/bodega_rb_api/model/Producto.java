@@ -52,13 +52,13 @@ public class Producto {
   @Column(name = "precio_unitario", nullable = false)
   private Double precioUnitario;
 
-  @Column(name = "precio_promocion", nullable = false)
+  @Column(name = "precio_promocion")
   private Double precioPromocion;
 
-  @Column(name = "inicio_promocion", nullable = false)
+  @Column(name = "inicio_promocion")
   private LocalDate inicioPromocion;
 
-  @Column(name = "fin_promocion", nullable = false)
+  @Column(name = "fin_promocion")
   private LocalDate finPromocion;
 
   @Column(name = "stock")
