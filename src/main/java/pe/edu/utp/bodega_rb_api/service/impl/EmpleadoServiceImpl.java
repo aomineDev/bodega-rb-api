@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import pe.edu.utp.bodega_rb_api.model.Empleado;
@@ -13,8 +14,14 @@ import pe.edu.utp.bodega_rb_api.service.EmpleadoService;
 @Service
 public class EmpleadoServiceImpl implements EmpleadoService {
 
+  private final PasswordEncoder passwordEncoder;
+
   @Autowired
   private EmpleadoRepository empleadoRepository;
+
+  EmpleadoServiceImpl(PasswordEncoder passwordEncoder) {
+    this.passwordEncoder = passwordEncoder;
+  }
 
   @Override
   public List<Empleado> findAll() {
@@ -28,6 +35,10 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 
   @Override
   public Empleado save(Empleado entity) {
+
+    if (entity.getClave() != null && !entity.getClave().isEmpty()) {
+      entity.setClave(passwordEncoder.encode(entity.getClave()));
+    }
     return empleadoRepository.save(entity);
   }
 
