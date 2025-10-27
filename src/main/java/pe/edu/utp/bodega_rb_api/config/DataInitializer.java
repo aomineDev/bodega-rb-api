@@ -17,7 +17,7 @@ public class DataInitializer implements CommandLineRunner {
   @Override
   @Transactional
   public void run(String... args) {
-    if (!rolRepository.existsByNombreRol(RolEnum.ADMINISTRADOR.getName())) {
+    if (!rolRepository.existsByNombre(RolEnum.ADMINISTRADOR.getName())) {
       for (RolEnum rol : RolEnum.values()) {
         Rol r = new Rol();
         r.setNombre(rol.getName());

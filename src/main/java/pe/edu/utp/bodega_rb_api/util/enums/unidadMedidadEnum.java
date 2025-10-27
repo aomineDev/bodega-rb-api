@@ -1,6 +1,6 @@
 package pe.edu.utp.bodega_rb_api.util.enums;
 
-public enum unidadMedidadEnum {
+public enum UnidadMedidadEnum {
 
   KILOGRAMO("KILOGRAMO"),
   LITRO("LITRO"),
@@ -8,7 +8,7 @@ public enum unidadMedidadEnum {
 
   private final String name;
 
-  unidadMedidadEnum(String name) {
+  UnidadMedidadEnum(String name) {
     this.name = name;
   }
 

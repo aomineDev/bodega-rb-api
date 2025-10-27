@@ -30,10 +30,10 @@ public class Producto {
   @Column(name = "producto_id")
   private Integer id;
 
-  // @ManyToOne
-  // @JoinColumn(name = "categoria_id")
-  // @OnDelete(action = OnDeleteAction.RESTRICT)
-  // private Categoria categoria;
+  @ManyToOne
+  @JoinColumn(name = "categoria_id")
+  @OnDelete(action = OnDeleteAction.RESTRICT)
+  private Categoria categoria;
 
   @ManyToOne
   @JoinColumn(name = "proveedor_id")
