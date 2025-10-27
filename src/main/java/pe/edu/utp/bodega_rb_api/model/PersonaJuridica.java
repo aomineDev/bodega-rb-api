@@ -22,9 +22,6 @@ public class PersonaJuridica extends Persona {
   @Column(name = "razon_social", nullable = false, length = 100)
   private String razonSocial;
 
-  @Column(name = "nombre_comercial", nullable = false, length = 100)
-  private String nombreComercial;
-
   @Column(name = "tipo_contribuyente", nullable = false, length = 50)
   private String tipoContribuyente;
 

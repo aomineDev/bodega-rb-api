@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.edu.utp.bodega_rb_api.model.ClienteJuridico;
+import pe.edu.utp.bodega_rb_api.service.ApiCustomerService;
 import pe.edu.utp.bodega_rb_api.service.ClienteJuridicoService;
 
 @RestController
@@ -22,6 +23,9 @@ import pe.edu.utp.bodega_rb_api.service.ClienteJuridicoService;
 public class ClienteJuridicoController {
   @Autowired
   ClienteJuridicoService service;
+
+  @Autowired
+  ApiCustomerService apiCustomerService;
 
   @GetMapping
   public ResponseEntity<List<ClienteJuridico>> findAll() {
@@ -51,5 +55,16 @@ public class ClienteJuridicoController {
   public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
     service.deleteById(id);
     return ResponseEntity.noContent().build();
+  }
+
+  @GetMapping("/sunat/{ruc}")
+  public ResponseEntity<?> buscarPorRuc(@PathVariable String ruc) {
+    try {
+      var data = apiCustomerService.buscarPorRuc(ruc);
+      return ResponseEntity.ok(data);
+    } catch (Exception e) {
+      System.out.println(e);
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error consultando SUNAT");
+    }
   }
 }
