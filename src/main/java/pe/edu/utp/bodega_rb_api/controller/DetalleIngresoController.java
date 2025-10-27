@@ -42,6 +42,7 @@ public class DetalleIngresoController {
 
   @PutMapping("/{id}")
   public ResponseEntity<DetalleIngreso> update(@PathVariable Integer id, @RequestBody DetalleIngreso entity) {
+    entity.setId(id);
     return ResponseEntity.ok(service.save(entity));
   }
 
