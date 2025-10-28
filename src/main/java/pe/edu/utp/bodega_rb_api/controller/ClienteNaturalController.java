@@ -21,8 +21,11 @@ import pe.edu.utp.bodega_rb_api.service.ClienteNaturalService;
 @RestController
 @RequestMapping("/api/clientes-naturales")
 public class ClienteNaturalController {
-  @Autowired
-  ClienteNaturalService service;
+  final ClienteNaturalService service;
+
+  public ClienteNaturalController(ClienteNaturalService service) {
+    this.service = service;
+  }
 
   @Autowired
   ApiCustomerService apiCustomerService;

@@ -2,6 +2,7 @@ package pe.edu.utp.bodega_rb_api.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.OnDelete;
@@ -66,5 +67,5 @@ public abstract class Comprobante {
 
   @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
   @JoinColumn(name = "comprobante_id")
-  protected List<DetalleVenta> detalleVentas;
+  protected List<DetalleVenta> detalleVentas = new ArrayList<>();
 }
