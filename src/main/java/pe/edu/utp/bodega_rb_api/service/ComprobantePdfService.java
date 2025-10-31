@@ -69,7 +69,7 @@ public class ComprobantePdfService {
 
     for (DetalleVenta det : comprobante.getDetalleVentas()) {
       table1.addCell(cell(det.getProducto().getNombre(), Element.ALIGN_LEFT));
-      table1.addCell(cell(String.format("%.0f", det.getCantidad()), Element.ALIGN_CENTER));
+      table1.addCell(cell(String.format("%.2f", det.getCantidad()), Element.ALIGN_CENTER));
       table1.addCell(cell(String.format("S/ %.2f", det.getSubTotal()), Element.ALIGN_RIGHT));
     }
 

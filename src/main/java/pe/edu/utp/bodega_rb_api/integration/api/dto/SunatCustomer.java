@@ -39,5 +39,4 @@ public class SunatCustomer {
   private String departamento;
   private Boolean es_agente_retencion;
   private Boolean es_buen_contribuyente;
-  private String locales_anexos;
 }

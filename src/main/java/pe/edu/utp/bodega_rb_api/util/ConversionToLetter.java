@@ -35,7 +35,7 @@ public class ConversionToLetter {
     if (numero <= 20)
       return UNIDADES[(int) numero];
     if (numero < 30)
-      return "VEINTI" + UNIDADES[(int) (numero - 20)].toLowerCase();
+      return "VEINTI" + UNIDADES[(int) (numero - 20)];
 
     if (numero < 100) {
       int decena = (int) (numero / 10);
