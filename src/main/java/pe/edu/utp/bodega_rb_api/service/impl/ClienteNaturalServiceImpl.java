@@ -1,5 +1,6 @@
 package pe.edu.utp.bodega_rb_api.service.impl;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +28,9 @@ public class ClienteNaturalServiceImpl implements ClienteNaturalService {
 
   @Override
   public ClienteNatural save(ClienteNatural entity) {
+    if (entity.getId() == null) {
+      entity.setFechaRegistro(LocalDate.now());
+    }
     return repository.save(entity);
   }
 
