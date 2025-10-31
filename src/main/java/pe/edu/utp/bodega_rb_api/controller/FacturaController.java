@@ -3,7 +3,9 @@ package pe.edu.utp.bodega_rb_api.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.edu.utp.bodega_rb_api.model.Factura;
+import pe.edu.utp.bodega_rb_api.service.ComprobantePdfService;
 import pe.edu.utp.bodega_rb_api.service.FacturaService;
 
 @RestController
@@ -22,6 +25,9 @@ import pe.edu.utp.bodega_rb_api.service.FacturaService;
 public class FacturaController {
   @Autowired
   FacturaService service;
+
+  @Autowired
+  ComprobantePdfService comprobantePdfService;
 
   @GetMapping
   public ResponseEntity<List<Factura>> findAll() {
@@ -49,5 +55,18 @@ public class FacturaController {
   public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
     service.deleteById(id);
     return ResponseEntity.noContent().build();
+  }
+
+  @GetMapping("/{id}/pdf")
+  public ResponseEntity<byte[]> generarPdf(@PathVariable Integer id) throws Exception {
+    Factura factura = service.findById(id)
+        .orElseThrow(() -> new RuntimeException("Factura no encontrada con ID: " + id));
+
+    byte[] pdf = comprobantePdfService.generarPdf(factura);
+
+    return ResponseEntity.ok()
+        .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=factura_" + id + ".pdf")
+        .contentType(MediaType.APPLICATION_PDF)
+        .body(pdf);
   }
 }
