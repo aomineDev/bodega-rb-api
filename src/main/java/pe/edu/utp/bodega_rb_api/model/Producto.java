@@ -43,7 +43,7 @@ public class Producto {
   @Column(name = "codigo_barra", unique = true)
   private String codigoBarra;
 
-  @Column(name = "nombre", unique = true, nullable = false, length = 50)
+  @Column(name = "nombre", nullable = false, length = 70)
   private String nombre;
 
   @Column(name = "descripcion")
@@ -67,7 +67,7 @@ public class Producto {
   @Column(name = "unidad_medida", nullable = false, length = 10)
   private String unidadMedida;
 
-  @Column(name = "imagen", length = 100)
+  @Column(name = "imagen")
   private String imagen;
 
 }

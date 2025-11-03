@@ -39,11 +39,11 @@ public class DataInitializer implements CommandLineRunner {
         root.setNombre("Root");
         root.setApellidoMaterno("");
         root.setApellidoPaterno("");
-        root.setDireccion("");
+        root.setDireccion(null);
         root.setImagen("");
         root.setFechaNacimiento(null);
-        root.setEmail("");
-        root.setTelefono("");
+        root.setEmail(null);
+        root.setTelefono(null);
         root.setClave(passwordEncoder.encode("root"));
         root.setRolId(rolAdmin);
         empleadoRepository.save(root);
