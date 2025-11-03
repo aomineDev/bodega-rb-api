@@ -30,6 +30,6 @@ public class PersonaNatural extends Persona {
   @Column(name = "apellido_materno", nullable = false, length = 50)
   private String apellidoMaterno;
 
-  @Column(name = "fecha_nacimiento", nullable = true)
+  @Column(name = "fecha_nacimiento")
   private LocalDate fechaNacimiento;
 }
