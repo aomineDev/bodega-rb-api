@@ -30,7 +30,7 @@ public abstract class Persona {
   @Column(name = "direccion", length = 70)
   protected String direccion;
 
-  @Column(name = "telefono", unique = true, columnDefinition = "CHAR(9)", nullable = false)
+  @Column(name = "telefono", unique = true, columnDefinition = "CHAR(9)")
   protected String telefono;
 
   @Column(name = "email", unique = true, length = 100)
