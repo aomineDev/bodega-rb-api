@@ -1,17 +1,13 @@
-package pe.edu.utp.bodega_rb_api.integration.api.dto;
+package pe.edu.utp.bodega_rb_api.integration.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
-@Setter
-@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class SunatCustomer {
@@ -39,5 +35,4 @@ public class SunatCustomer {
   private String departamento;
   private Boolean es_agente_retencion;
   private Boolean es_buen_contribuyente;
-  private String locales_anexos;
 }

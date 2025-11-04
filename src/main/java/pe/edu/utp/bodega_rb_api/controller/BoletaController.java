@@ -3,7 +3,9 @@ package pe.edu.utp.bodega_rb_api.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,12 +18,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import pe.edu.utp.bodega_rb_api.model.Boleta;
 import pe.edu.utp.bodega_rb_api.service.BoletaService;
+import pe.edu.utp.bodega_rb_api.service.ComprobantePdfService;
 
 @RestController
 @RequestMapping("/api/boletas")
 public class BoletaController {
   @Autowired
   BoletaService service;
+
+  @Autowired
+  ComprobantePdfService comprobantePdfService;
 
   @GetMapping
   public ResponseEntity<List<Boleta>> findAll() {
@@ -50,4 +56,18 @@ public class BoletaController {
     service.deleteById(id);
     return ResponseEntity.noContent().build();
   }
+
+  @GetMapping("/{id}/pdf")
+  public ResponseEntity<byte[]> generarPdf(@PathVariable Integer id) throws Exception {
+    Boleta boleta = service.findById(id)
+        .orElseThrow(() -> new RuntimeException("Boleta no encontrada con ID: " + id));
+
+    byte[] pdf = comprobantePdfService.generarPdf(boleta);
+
+    return ResponseEntity.ok()
+        .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=boleta_" + id + ".pdf")
+        .contentType(MediaType.APPLICATION_PDF)
+        .body(pdf);
+  }
+
 }

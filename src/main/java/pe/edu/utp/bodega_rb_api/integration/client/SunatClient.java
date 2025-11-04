@@ -1,7 +1,7 @@
-package pe.edu.utp.bodega_rb_api.integration.api.client;
+package pe.edu.utp.bodega_rb_api.integration.client;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import pe.edu.utp.bodega_rb_api.integration.api.dto.SunatCustomer;
+import pe.edu.utp.bodega_rb_api.integration.dto.SunatCustomer;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

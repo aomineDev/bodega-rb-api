@@ -1,7 +1,5 @@
 package pe.edu.utp.bodega_rb_api.config;
 
-import java.time.LocalDate;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -41,11 +39,11 @@ public class DataInitializer implements CommandLineRunner {
         root.setNombre("Root");
         root.setApellidoMaterno("");
         root.setApellidoPaterno("");
-        root.setDireccion("");
+        root.setDireccion(null);
         root.setImagen("");
-        root.setFechaNacimiento(LocalDate.of(2000, 1, 1));
-        root.setEmail("");
-        root.setTelefono("");
+        root.setFechaNacimiento(null);
+        root.setEmail(null);
+        root.setTelefono(null);
         root.setClave(passwordEncoder.encode("root"));
         root.setRolId(rolAdmin);
         empleadoRepository.save(root);
