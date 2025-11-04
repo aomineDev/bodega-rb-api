@@ -7,6 +7,7 @@ import pe.edu.utp.bodega_rb_api.integration.api.client.ReniecClient;
 import pe.edu.utp.bodega_rb_api.integration.api.client.SunatClient;
 import pe.edu.utp.bodega_rb_api.integration.api.dto.ReniecCustomer;
 import pe.edu.utp.bodega_rb_api.integration.api.dto.SunatCustomer;
+import pe.edu.utp.bodega_rb_api.repository.ClienteNaturalRepository;
 
 @Service
 public class ApiCustomerService {
@@ -18,7 +19,9 @@ public class ApiCustomerService {
   private SunatClient sunatClient;
 
   public ReniecCustomer buscarPorDni(String dni) throws Exception {
+    // getCllienteByDni()
     return reniecClient.getCustomer(dni);
+    // ClienteNaturalRepository.scae()
   }
 
   public SunatCustomer buscarPorRuc(String ruc) throws Exception {
