@@ -19,12 +19,12 @@ public class PersonaJuridica extends Persona {
   @Column(name = "ruc", unique = true, nullable = false, columnDefinition = "CHAR(11)")
   private String ruc;
 
-  @Column(name = "razon_social", nullable = false, length = 100)
+  @Column(name = "razon_social", nullable = false, length = 300)
   private String razonSocial;
 
-  @Column(name = "tipo_contribuyente", nullable = false, length = 50)
+  @Column(name = "tipo_contribuyente", nullable = false, length = 100)
   private String tipoContribuyente;
 
-  @Column(name = "actividad_economica", nullable = false, length = 100)
+  @Column(name = "actividad_economica", nullable = false, length = 300)
   private String actividadEconomica;
 }

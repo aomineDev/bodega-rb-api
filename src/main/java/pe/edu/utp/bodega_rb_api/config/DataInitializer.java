@@ -40,7 +40,7 @@ public class DataInitializer implements CommandLineRunner {
         root.setApellidoMaterno("");
         root.setApellidoPaterno("");
         root.setDireccion(null);
-        root.setImagen("");
+        root.setImagen("/img/default.png");
         root.setFechaNacimiento(null);
         root.setEmail(null);
         root.setTelefono(null);

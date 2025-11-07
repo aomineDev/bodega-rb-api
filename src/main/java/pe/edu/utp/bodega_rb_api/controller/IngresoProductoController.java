@@ -42,6 +42,7 @@ public class IngresoProductoController {
 
   @PutMapping("/{id}")
   public ResponseEntity<IngresoProducto> update(@PathVariable Integer id, @RequestBody IngresoProducto entity) {
+    entity.setId(id);
     return ResponseEntity.ok(service.save(entity));
   }
 
