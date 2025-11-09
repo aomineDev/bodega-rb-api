@@ -31,6 +31,7 @@ public class AuthController {
 
   @PostMapping("/login")
   public ResponseEntity<TokenResponse> login(@RequestBody LoginRequest credentials) throws BadCredentialsException {
+    System.out.println(credentials);
     Authentication auth = authenticationManager
         .authenticate(new UsernamePasswordAuthenticationToken(credentials.getDni(), credentials.getPassword()));
 
