@@ -13,15 +13,11 @@ import pe.edu.utp.bodega_rb_api.service.EmpleadoService;
 
 @Service
 public class EmpleadoServiceImpl implements EmpleadoService {
-
-  private final PasswordEncoder passwordEncoder;
+  @Autowired
+  private PasswordEncoder passwordEncoder;
 
   @Autowired
   private EmpleadoRepository empleadoRepository;
-
-  EmpleadoServiceImpl(PasswordEncoder passwordEncoder) {
-    this.passwordEncoder = passwordEncoder;
-  }
 
   @Override
   public List<Empleado> findAll() {
@@ -31,6 +27,16 @@ public class EmpleadoServiceImpl implements EmpleadoService {
   @Override
   public Optional<Empleado> findById(Integer id) {
     return empleadoRepository.findById(id);
+  }
+
+  @Override
+  public List<Empleado> findByRol_Nombre(String dni) {
+    return empleadoRepository.findByRol_Nombre(dni);
+  }
+
+  @Override
+  public Optional<Empleado> findByDni(String dni) {
+    return empleadoRepository.findByDni(dni);
   }
 
   @Override

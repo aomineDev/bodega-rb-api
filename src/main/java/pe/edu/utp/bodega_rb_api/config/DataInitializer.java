@@ -45,7 +45,7 @@ public class DataInitializer implements CommandLineRunner {
         root.setEmail(null);
         root.setTelefono(null);
         root.setClave(passwordEncoder.encode("root"));
-        root.setRolId(rolAdmin);
+        root.setRol(rolAdmin);
         empleadoRepository.save(root);
       }
 

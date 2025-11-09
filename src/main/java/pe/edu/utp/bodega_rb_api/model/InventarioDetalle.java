@@ -12,12 +12,12 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "detalles_auditoria")
-public class DetalleAuditoria {
+@Table(name = "inventario_detalles")
+public class InventarioDetalle {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "detalle_auditoria_id", nullable = false)
+  @Column(name = "inventario_detalle_id", nullable = false)
   private Integer id;
 
   @ManyToOne
@@ -25,15 +25,28 @@ public class DetalleAuditoria {
   private Producto producto;
 
   @Column(name = "stock_sistema", nullable = false)
-  private Integer stockSistema;
+  private Double stockSistema;
 
   @Column(name = "stock_fisico", nullable = false)
-  private Integer stockFisico;
+  private Double stockFisico = 0d;
 
   @Column(name = "diferencia")
-  private Integer diferencia;
+  private Double diferencia;
 
   @Column(name = "observaciones")
   private String observaciones;
 
+  public void addStock(Double stock) {
+    this.stockFisico += stock;
+    this.diferencia = this.calcDiferencia();
+  }
+
+  public void setStockFisico(Double stockFisico) {
+    this.stockFisico = stockFisico;
+    this.diferencia = this.calcDiferencia();
+  }
+
+  public Double calcDiferencia() {
+    return this.stockSistema - this.stockFisico;
+  }
 }

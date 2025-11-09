@@ -31,5 +31,5 @@ public class Empleado extends PersonaNatural {
   @ManyToOne
   @JoinColumn(name = "rol_id")
   @OnDelete(action = OnDeleteAction.SET_NULL)
-  private Rol rolId;
+  private Rol rol;
 }

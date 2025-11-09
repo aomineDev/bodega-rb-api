@@ -62,7 +62,7 @@ public class Producto {
   private LocalDate finPromocion;
 
   @Column(name = "stock")
-  private Integer stock;
+  private Double stock;
 
   @Column(name = "unidad_medida", nullable = false, length = 10)
   private String unidadMedida;

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.edu.utp.bodega_rb_api.model.Empleado;
@@ -24,7 +25,10 @@ public class EmpleadoController {
   private EmpleadoService service;
 
   @GetMapping
-  public ResponseEntity<List<Empleado>> findAll() {
+  public ResponseEntity<List<Empleado>> findAll(@RequestParam(value = "rol", required = false) String rol) {
+    if (rol != null)
+      return ResponseEntity.ok(service.findByRol_Nombre(rol));
+
     return ResponseEntity.ok(service.findAll());
   }
 
