@@ -1,4 +1,4 @@
-package pe.edu.utp.bodega_rb_api.integration.api.dto;
+package pe.edu.utp.bodega_rb_api.integration.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

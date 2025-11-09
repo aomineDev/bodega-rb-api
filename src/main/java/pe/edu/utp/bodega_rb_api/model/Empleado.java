@@ -19,7 +19,7 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "empleado")
+@Table(name = "empleados")
 public class Empleado extends PersonaNatural {
 
   @Column(name = "clave", nullable = false, length = 70)
