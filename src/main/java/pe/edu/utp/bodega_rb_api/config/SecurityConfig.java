@@ -44,6 +44,11 @@ public class SecurityConfig {
             .requestMatchers("/api/auth/login", "/api/auth/logout", "/api/storage/**").permitAll()
             .requestMatchers("/api/inventario")
             .hasAnyRole(RolEnum.ADMINISTRADOR.toString(), RolEnum.JEFE_ALMACEN.toString())
+            .requestMatchers("/api/empleados").hasRole(RolEnum.ADMINISTRADOR.toString())
+            .requestMatchers("/api/proveedores")
+            .hasAnyRole(RolEnum.ADMINISTRADOR.toString(), RolEnum.JEFE_ALMACEN.toString())
+            .requestMatchers("/api/productos")
+            .hasAnyRole(RolEnum.ADMINISTRADOR.toString(), RolEnum.JEFE_ALMACEN.toString())
             .anyRequest().authenticated())
         .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 

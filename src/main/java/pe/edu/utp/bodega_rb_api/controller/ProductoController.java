@@ -4,7 +4,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import pe.edu.utp.bodega_rb_api.model.Producto;
 import pe.edu.utp.bodega_rb_api.service.ProductoService;
-import pe.edu.utp.bodega_rb_api.util.enums.RolEnum;
 
 import java.util.List;
 
@@ -44,12 +43,15 @@ public class ProductoController {
   }
 
   @PutMapping("/{id}")
+  @PreAuthorize("hasRole('ADMINISTRADOR')")
+
   public ResponseEntity<Producto> update(@PathVariable Integer id, @RequestBody Producto entity) {
     entity.setId(id);
     return ResponseEntity.ok(productoService.save(entity));
   }
 
   @DeleteMapping("/{id}")
+  @PreAuthorize("hasRole('ADMINISTRADOR')")
   public ResponseEntity<Void> deleteByid(@PathVariable Integer id) {
     productoService.deleteById(id);
     return ResponseEntity.noContent().build();
