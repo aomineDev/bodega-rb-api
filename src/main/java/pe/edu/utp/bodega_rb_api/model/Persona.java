@@ -7,6 +7,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,4 +37,13 @@ public abstract class Persona {
 
   @Column(name = "email", unique = true, length = 150)
   protected String email;
+
+  // el '' del fronted, lo convierte a nulo
+  @PrePersist
+  @PreUpdate
+  protected void normalizeFields() {
+    if (email != null && email.isBlank()) {
+      email = null;
+    }
+  }
 }
