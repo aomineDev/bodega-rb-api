@@ -1,5 +1,6 @@
 package pe.edu.utp.bodega_rb_api.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,7 @@ public class ProveedorController {
   @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'JEFE_ALMACEN')")
 
   public ResponseEntity<Proveedor> save(@RequestBody Proveedor proveedor) {
+    proveedor.setFechaRegistro(LocalDate.now());
     return ResponseEntity.status(HttpStatus.CREATED).body(service.save(proveedor));
   }
 
