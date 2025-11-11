@@ -1,5 +1,6 @@
 package pe.edu.utp.bodega_rb_api.service.impl;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +29,7 @@ public class ProveedorServiceImpl implements ProveedorService {
 
   @Override
   public Proveedor save(Proveedor entity) {
+    entity.setFechaRegistro(LocalDate.now());
     return proveedorRepository.save(entity);
   }
 
