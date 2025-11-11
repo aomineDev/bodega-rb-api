@@ -37,17 +37,20 @@ public class CategoriaController {
   }
 
   @PostMapping
+  @PreAuthorize("hasRole('ADMINISTRADOR')")
   public ResponseEntity<Categoria> save(@RequestBody Categoria entity) {
     return ResponseEntity.status(HttpStatus.CREATED).body(service.save(entity));
   }
 
   @PutMapping("/{id}")
+  @PreAuthorize("hasRole('ADMINISTRADOR')")
   public ResponseEntity<Categoria> update(@PathVariable Integer id, @RequestBody Categoria entity) {
     entity.setId(id);
     return ResponseEntity.ok(service.save(entity));
   }
 
   @DeleteMapping("/{id}")
+  @PreAuthorize("hasRole('ADMINISTRADOR')")
   public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
     service.deleteById(id);
     return ResponseEntity.noContent().build();

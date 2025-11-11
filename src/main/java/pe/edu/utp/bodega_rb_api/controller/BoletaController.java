@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,16 +43,19 @@ public class BoletaController {
   }
 
   @PostMapping
+  @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'CAJERO')")
   public ResponseEntity<Boleta> save(@RequestBody Boleta boleta) {
     return ResponseEntity.status(HttpStatus.CREATED).body(service.save(boleta));
   }
 
   @PutMapping("/{id}")
+  @PreAuthorize("hasRole('ADMINISTRADOR')")
   public ResponseEntity<Boleta> update(@PathVariable Integer id, @RequestBody Boleta boleta) {
     return ResponseEntity.ok(service.save(boleta));
   }
 
   @DeleteMapping("/{id}")
+  @PreAuthorize("hasRole('ADMINISTRADOR')")
   public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
     service.deleteById(id);
     return ResponseEntity.noContent().build();

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,17 +39,20 @@ public class ClienteNaturalController {
   }
 
   @PostMapping
+  @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'CAJERO')")
   public ResponseEntity<ClienteNatural> save(@RequestBody ClienteNatural clienteNatural) {
     return ResponseEntity.status(HttpStatus.CREATED).body(service.save(clienteNatural));
   }
 
   @PutMapping("/{id}")
+  @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'CAJERO')")
   public ResponseEntity<ClienteNatural> update(@PathVariable Integer id, @RequestBody ClienteNatural clienteNatural) {
     clienteNatural.setId(id);
     return ResponseEntity.ok(service.save(clienteNatural));
   }
 
   @DeleteMapping("/{id}")
+  @PreAuthorize("hasRole('ADMINISTRADOR')")
   public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
     service.deleteById(id);
     return ResponseEntity.noContent().build();
