@@ -55,9 +55,9 @@ public class SecurityConfig {
             .hasAnyRole(RolEnum.ADMINISTRADOR.toString(), RolEnum.JEFE_ALMACEN.toString(), RolEnum.ASISTENTE.toString())
             .requestMatchers("/api/empleados").hasRole(RolEnum.ADMINISTRADOR.toString())
             .requestMatchers("/api/proveedores")
-            .hasAnyRole(RolEnum.ADMINISTRADOR.toString(), RolEnum.JEFE_ALMACEN.toString())
+            .hasAnyRole(RolEnum.ADMINISTRADOR.toString(), RolEnum.JEFE_ALMACEN.toString(), RolEnum.CAJERO.toString())
             .requestMatchers("/api/productos")
-            .hasAnyRole(RolEnum.ADMINISTRADOR.toString(), RolEnum.JEFE_ALMACEN.toString())
+            .hasAnyRole(RolEnum.ADMINISTRADOR.toString(), RolEnum.JEFE_ALMACEN.toString(), RolEnum.CAJERO.toString())
             .anyRequest().authenticated())
         .exceptionHandling(ex -> ex
             .authenticationEntryPoint(this::authenticationEntryPoint)
