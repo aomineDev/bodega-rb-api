@@ -9,7 +9,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.client.HttpServerErrorException.InternalServerError;
 
 import pe.edu.utp.bodega_rb_api.dto.ErrorResponse;
 
@@ -24,7 +23,7 @@ public class ErrorHandler {
   @ExceptionHandler(BadCredentialsException.class)
   public ResponseEntity<ErrorResponse> handleBadCredentialsException(BadCredentialsException ex) {
     return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-        .body(new ErrorResponse("Invalid credentials", "usuario o contraseña incorrectos",
+        .body(new ErrorResponse("Invalid credentials", "Usuario y/o contraseña incorrectos",
             HttpStatus.UNAUTHORIZED.value()));
   }
 
