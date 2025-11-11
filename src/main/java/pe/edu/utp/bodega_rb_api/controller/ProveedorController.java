@@ -38,17 +38,18 @@ public class ProveedorController {
 
   @PostMapping
   @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'JEFE_ALMACEN')")
-
   public ResponseEntity<Proveedor> save(@RequestBody Proveedor proveedor) {
     return ResponseEntity.status(HttpStatus.CREATED).body(service.save(proveedor));
   }
 
+  @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'JEFE_ALMACEN')")
   @PutMapping("/{id}")
   public ResponseEntity<Proveedor> update(@PathVariable Integer id, @RequestBody Proveedor proveedor) {
     proveedor.setId(id);
     return ResponseEntity.ok(service.save(proveedor));
   }
 
+  @PreAuthorize("hasRole('ADMINISTRADOR')")
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
     service.deleteById(id);

@@ -50,14 +50,14 @@ public class SecurityConfig {
         .csrf(csrf -> csrf.disable())
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/api/auth/login", "/api/auth/logout", "/api/storage/**").permitAll()
+            .requestMatchers("/api/auth/login", "/api/auth/logout", "/api/storage/**", "/storage/**").permitAll()
             .requestMatchers("/api/inventarios")
             .hasAnyRole(RolEnum.ADMINISTRADOR.toString(), RolEnum.JEFE_ALMACEN.toString(), RolEnum.ASISTENTE.toString())
             .requestMatchers("/api/empleados").hasRole(RolEnum.ADMINISTRADOR.toString())
             .requestMatchers("/api/proveedores")
-            .hasAnyRole(RolEnum.ADMINISTRADOR.toString(), RolEnum.JEFE_ALMACEN.toString())
+            .hasAnyRole(RolEnum.ADMINISTRADOR.toString(), RolEnum.JEFE_ALMACEN.toString(), RolEnum.CAJERO.toString())
             .requestMatchers("/api/productos")
-            .hasAnyRole(RolEnum.ADMINISTRADOR.toString(), RolEnum.JEFE_ALMACEN.toString())
+            .hasAnyRole(RolEnum.ADMINISTRADOR.toString(), RolEnum.JEFE_ALMACEN.toString(), RolEnum.CAJERO.toString())
             .anyRequest().authenticated())
         .exceptionHandling(ex -> ex
             .authenticationEntryPoint(this::authenticationEntryPoint)

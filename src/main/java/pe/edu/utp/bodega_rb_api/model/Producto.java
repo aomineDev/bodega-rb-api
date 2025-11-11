@@ -14,12 +14,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -43,7 +41,7 @@ public class Producto {
   @Column(name = "codigo_barra", unique = true)
   private String codigoBarra;
 
-  @Column(name = "nombre", length = 100)
+  @Column(name = "nombre")
   private String nombre;
 
   @Column(name = "descripcion")
@@ -64,7 +62,7 @@ public class Producto {
   @Column(name = "stock")
   private Double stock;
 
-  @Column(name = "unidad_medida", nullable = false, length = 10)
+  @Column(name = "unidad_medida", nullable = false)
   private String unidadMedida;
 
   @Column(name = "imagen")

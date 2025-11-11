@@ -26,7 +26,7 @@ public class ComprobantePdfService {
 
   public byte[] generarPdf(Comprobante comprobante) throws Exception {
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
-    Document document = new Document(new Rectangle(227, 800), 10, 10, 10, 10);
+    Document document = new Document(new Rectangle(160, 800), 10, 10, 10, 10);
     PdfWriter.getInstance(document, baos);
     document.open();
 
@@ -34,30 +34,30 @@ public class ComprobantePdfService {
     document.add(p(("Huaycán, Av. Andrés Avelino Cáceres"), Element.ALIGN_CENTER));
     document.add(p(("ATE - LIMA - LIMA"), Element.ALIGN_CENTER));
     document.add(p(("Teléfono: 935456467"), Element.ALIGN_CENTER));
-    document.add(p("-".repeat(34)));
+    document.add(p("-".repeat(23)));
 
     if (comprobante instanceof Boleta boleta) {
       ClienteNatural c = boleta.getClienteNatural();
       document.add(p(("BOLETA DE VENTA ELECTRONICA"), Element.ALIGN_CENTER));
       document.add(p("B-" + boleta.getId(), Element.ALIGN_CENTER));
-      document.add(p("-".repeat(34)));
+      document.add(p("-".repeat(23)));
       document.add(p("Cliente: " + c.getNombre() + " " + c.getApellidoPaterno() + " " + c.getApellidoMaterno()));
       document.add(p("DNI: " + c.getDni()));
     } else if (comprobante instanceof Factura factura) {
       ClienteJuridico c = factura.getClienteJuridico();
       document.add(p(("FACTURA DE VENTA ELECTRONICA"), Element.ALIGN_CENTER));
       document.add(p("F-" + factura.getId(), Element.ALIGN_CENTER));
-      document.add(p("-".repeat(34)));
+      document.add(p("-".repeat(23)));
       document.add(p("RUC: " + c.getRuc()));
       document.add(p("Razón Social: " + c.getRazonSocial()));
       document.add(p("Dirección: " + c.getDireccion()));
     }
 
-    document.add(p("-".repeat(34)));
+    document.add(p("-".repeat(23)));
     document.add(p("Fecha: " + comprobante.getFecha()));
     document.add(p("Hora: " + comprobante.getHora()));
 
-    document.add(p("-".repeat(34)));
+    document.add(p("-".repeat(23)));
 
     PdfPTable table1 = new PdfPTable(3);
     table1.setWidthPercentage(100);
@@ -75,7 +75,7 @@ public class ComprobantePdfService {
 
     document.add(table1);
 
-    document.add(p("-".repeat(34)));
+    document.add(p("-".repeat(23)));
 
     PdfPTable table2 = new PdfPTable(2);
     table2.setWidthPercentage(100);
@@ -87,19 +87,19 @@ public class ComprobantePdfService {
     table2.addCell(cell("I.G.V:", Element.ALIGN_LEFT));
     table2.addCell(cell(String.format("S/ %.2f", comprobante.getIgv()), Element.ALIGN_RIGHT));
 
-    table2.addCell(cell("IMPORTE TOTAL:", Element.ALIGN_LEFT));
+    table2.addCell(cell("TOTAL:", Element.ALIGN_LEFT));
     table2.addCell(cell(String.format("S/ %.2f", comprobante.getPrecioTotal()), Element.ALIGN_RIGHT));
 
     document.add(table2);
 
-    document.add(p("-".repeat(34)));
+    document.add(p("-".repeat(23)));
     String totalEnLetras = ConversionToLetter.convertir(comprobante.getPrecioTotal());
     document.add(p("SON: " + totalEnLetras + " SOLES"));
-    document.add(p("-".repeat(34)));
+    document.add(p("-".repeat(23)));
 
     document.add(p("GRACIAS POR SU COMPRA", Element.ALIGN_CENTER));
 
-    document.add(p("-".repeat(34)));
+    document.add(p("-".repeat(23)));
 
     document.close();
     return baos.toByteArray();
