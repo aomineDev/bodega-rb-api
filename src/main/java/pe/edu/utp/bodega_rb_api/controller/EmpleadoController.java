@@ -47,7 +47,7 @@ public class EmpleadoController {
   }
 
   @PutMapping("/{id}")
-  @PreAuthorize("hasRole('ADMINISTRADOR')")
+  @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'CAJERO', 'ASISTENTE', 'JEFE_ALMACEN')")
   public ResponseEntity<Empleado> update(@PathVariable Integer id, @RequestBody Empleado entity) {
     entity.setId(id);
     return ResponseEntity.ok(service.save(entity));

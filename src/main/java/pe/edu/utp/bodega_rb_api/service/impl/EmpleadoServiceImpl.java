@@ -41,10 +41,24 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 
   @Override
   public Empleado save(Empleado entity) {
+    if (entity.getId() != null) {
+      Optional<Empleado> existingEmpleadoOpt = empleadoRepository.findById(entity.getId());
+      if (existingEmpleadoOpt.isPresent()) {
+        Empleado existingEmpleado = existingEmpleadoOpt.get();
 
-    if (entity.getClave() != null && !entity.getClave().isEmpty()) {
-      entity.setClave(passwordEncoder.encode(entity.getClave()));
+        if (entity.getClave() != null && !entity.getClave().isEmpty()) {
+          entity.setClave(passwordEncoder.encode(entity.getClave()));
+        } else {
+          entity.setClave(existingEmpleado.getClave());
+        }
+      }
+    } else {
+      // Es un nuevo registro
+      if (entity.getClave() != null && !entity.getClave().isEmpty()) {
+        entity.setClave(passwordEncoder.encode(entity.getClave()));
+      }
     }
+
     return empleadoRepository.save(entity);
   }
 
