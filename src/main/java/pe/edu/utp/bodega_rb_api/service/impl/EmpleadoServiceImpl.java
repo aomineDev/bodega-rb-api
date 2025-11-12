@@ -63,6 +63,19 @@ public class EmpleadoServiceImpl implements EmpleadoService {
   }
 
   @Override
+  public Empleado updatePassword(Integer id, String currentPassword, String newPassword) {
+    Empleado empleado = empleadoRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Empleado no encontrado"));
+
+    if (!passwordEncoder.matches(currentPassword, empleado.getClave())) {
+      throw new RuntimeException("Contraseña actual incorrecta");
+    }
+
+    empleado.setClave(passwordEncoder.encode(newPassword));
+    return empleadoRepository.save(empleado);
+  }
+
+  @Override
   public void deleteById(Integer id) {
     empleadoRepository.deleteById(id);
   }
