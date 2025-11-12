@@ -44,6 +44,7 @@ public class EmpleadoController {
   @PostMapping
   @PreAuthorize("hasRole('ADMINISTRADOR')")
   public ResponseEntity<Empleado> save(@RequestBody Empleado entity) {
+    entity.setClave(entity.getClave());
     return ResponseEntity.status(HttpStatus.CREATED).body(service.save(entity));
   }
 
