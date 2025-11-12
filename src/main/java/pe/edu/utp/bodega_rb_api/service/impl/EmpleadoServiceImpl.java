@@ -46,10 +46,11 @@ public class EmpleadoServiceImpl implements EmpleadoService {
       if (existingEmpleadoOpt.isPresent()) {
         Empleado existingEmpleado = existingEmpleadoOpt.get();
 
-        if (entity.getClave() != null && !entity.getClave().isEmpty()) {
-          entity.setClave(passwordEncoder.encode(entity.getClave()));
-        } else {
+        if (entity.getClave() == null || entity.getClave().isEmpty()
+            || entity.getClave().startsWith("$2a$")) {
           entity.setClave(existingEmpleado.getClave());
+        } else {
+          entity.setClave(passwordEncoder.encode(entity.getClave()));
         }
       }
     } else {
