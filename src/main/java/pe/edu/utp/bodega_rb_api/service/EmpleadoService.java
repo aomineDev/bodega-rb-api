@@ -9,4 +9,6 @@ public interface EmpleadoService extends ApiService<Empleado> {
   List<Empleado> findByRol_Nombre(String rol);
 
   Optional<Empleado> findByDni(String dni);
+
+  Empleado updatePassword(Integer id, String currentPassword, String newPassword);
 }

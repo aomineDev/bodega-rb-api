@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import pe.edu.utp.bodega_rb_api.dto.PasswordChangeRequest;
 import pe.edu.utp.bodega_rb_api.model.Empleado;
 import pe.edu.utp.bodega_rb_api.service.EmpleadoService;
 
@@ -43,14 +44,22 @@ public class EmpleadoController {
   @PostMapping
   @PreAuthorize("hasRole('ADMINISTRADOR')")
   public ResponseEntity<Empleado> save(@RequestBody Empleado entity) {
+    entity.setClave(entity.getClave());
     return ResponseEntity.status(HttpStatus.CREATED).body(service.save(entity));
   }
 
   @PutMapping("/{id}")
-  @PreAuthorize("hasRole('ADMINISTRADOR')")
+  @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'CAJERO', 'ASISTENTE', 'JEFE_ALMACEN')")
   public ResponseEntity<Empleado> update(@PathVariable Integer id, @RequestBody Empleado entity) {
     entity.setId(id);
     return ResponseEntity.ok(service.save(entity));
+  }
+
+  @PutMapping("/{id}/password")
+  public ResponseEntity<Empleado> updatePassword(
+      @PathVariable Integer id,
+      @RequestBody PasswordChangeRequest request) {
+    return ResponseEntity.ok(service.updatePassword(id, request.getCurrentPassword(), request.getNewPassword()));
   }
 
   @DeleteMapping("/{id}")

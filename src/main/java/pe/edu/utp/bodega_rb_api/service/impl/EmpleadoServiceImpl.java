@@ -41,11 +41,39 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 
   @Override
   public Empleado save(Empleado entity) {
+    if (entity.getId() != null) {
+      Optional<Empleado> existingEmpleadoOpt = empleadoRepository.findById(entity.getId());
+      if (existingEmpleadoOpt.isPresent()) {
+        Empleado existingEmpleado = existingEmpleadoOpt.get();
 
-    if (entity.getClave() != null && !entity.getClave().isEmpty()) {
-      entity.setClave(passwordEncoder.encode(entity.getClave()));
+        if (entity.getClave() == null || entity.getClave().isEmpty()
+            || entity.getClave().startsWith("$2a$")) {
+          entity.setClave(existingEmpleado.getClave());
+        } else {
+          entity.setClave(passwordEncoder.encode(entity.getClave()));
+        }
+      }
+    } else {
+      // Es un nuevo registro
+      if (entity.getClave() != null && !entity.getClave().isEmpty()) {
+        entity.setClave(passwordEncoder.encode(entity.getClave()));
+      }
     }
+
     return empleadoRepository.save(entity);
+  }
+
+  @Override
+  public Empleado updatePassword(Integer id, String currentPassword, String newPassword) {
+    Empleado empleado = empleadoRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Empleado no encontrado"));
+
+    if (!passwordEncoder.matches(currentPassword, empleado.getClave())) {
+      throw new RuntimeException("Contraseña actual incorrecta");
+    }
+
+    empleado.setClave(passwordEncoder.encode(newPassword));
+    return empleadoRepository.save(empleado);
   }
 
   @Override
