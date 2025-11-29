@@ -8,6 +8,9 @@ import java.util.List;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,6 +36,11 @@ import lombok.Setter;
 @Entity
 @Table(name = "comprobantes")
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "tipo")
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = Boleta.class, name = "BOLETA"),
+    @JsonSubTypes.Type(value = Factura.class, name = "FACTURA")
+})
 public abstract class Comprobante {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,6 +62,9 @@ public abstract class Comprobante {
   @Column(name = "precio_total", nullable = false)
   protected Double precioTotal;
 
+  @Column(name = "tipo_pago", nullable = false)
+  private String tipoPago;
+
   @Column(name = "estado", nullable = false)
   protected Boolean estado;
 
@@ -68,4 +79,10 @@ public abstract class Comprobante {
   @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
   @JoinColumn(name = "comprobante_id")
   protected List<DetalleVenta> detalleVentas = new ArrayList<>();
+
+  @ManyToOne
+  @JoinColumn(name = "caja_id")
+  @OnDelete(action = OnDeleteAction.SET_NULL)
+  private Caja caja;
+
 }

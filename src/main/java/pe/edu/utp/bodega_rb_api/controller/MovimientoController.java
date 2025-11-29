@@ -51,4 +51,10 @@ public class MovimientoController {
     service.deleteById(id);
     return ResponseEntity.noContent().build();
   }
+
+  @GetMapping("/caja/{cajaId}")
+  public ResponseEntity<List<Movimiento>> findByCaja(@PathVariable Integer cajaId) {
+    return ResponseEntity.ok(service.findByCaja(cajaId));
+  }
+
 }

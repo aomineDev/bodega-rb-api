@@ -44,6 +44,9 @@ public class Caja {
   @Column(name = "monto_cierre")
   private Double montoCierre;
 
+  @Column(name = "saldo_actual", nullable = false)
+  private Double saldoActual = 0.0;
+
   @Column(name = "estado", nullable = false)
   private Boolean estado;
 

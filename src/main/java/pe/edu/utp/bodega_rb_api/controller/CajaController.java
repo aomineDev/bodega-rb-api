@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import pe.edu.utp.bodega_rb_api.dto.ResumenCajaDTO;
 import pe.edu.utp.bodega_rb_api.model.Caja;
 import pe.edu.utp.bodega_rb_api.service.CajaService;
 
@@ -57,5 +59,19 @@ public class CajaController {
     return service.findCajaAbierta()
         .map(ResponseEntity::ok)
         .orElseGet(() -> ResponseEntity.ok(null));
+  }
+
+  @GetMapping("/{cajaId}/resumen")
+  public ResumenCajaDTO getResumenCaja(@PathVariable Integer cajaId) {
+    return service.getResumenCaja(cajaId);
+  }
+
+  @PutMapping("/{cajaId}/cerrar")
+  public ResponseEntity<Caja> cerrarCaja(
+      @PathVariable Integer cajaId,
+      @RequestBody Caja caja) {
+
+    caja.setId(cajaId);
+    return ResponseEntity.ok(service.cerrarCaja(caja));
   }
 }
