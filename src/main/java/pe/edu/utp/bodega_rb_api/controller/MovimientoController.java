@@ -14,36 +14,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import pe.edu.utp.bodega_rb_api.model.Rol;
-import pe.edu.utp.bodega_rb_api.service.RolService;
+import pe.edu.utp.bodega_rb_api.model.Movimiento;
+import pe.edu.utp.bodega_rb_api.service.MovimientoService;
 
 @RestController
-@RequestMapping("/api/roles")
-public class RolController {
+@RequestMapping("/api/movimientos")
+public class MovimientoController {
   @Autowired
-  private RolService service;
+  private MovimientoService service;
 
   @GetMapping
-  public ResponseEntity<List<Rol>> findAll() {
+  public ResponseEntity<List<Movimiento>> findAll() {
     return ResponseEntity.ok(service.findAll());
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Rol> findById(@PathVariable Integer id) {
+  public ResponseEntity<Movimiento> findById(@PathVariable Integer id) {
     return service.findById(id)
         .map(ResponseEntity::ok)
         .orElseGet(() -> ResponseEntity.notFound().build());
   }
 
   @PostMapping
-  public ResponseEntity<Rol> save(@RequestBody Rol rol) {
-    return ResponseEntity.status(HttpStatus.CREATED).body(service.save(rol));
+  public ResponseEntity<Movimiento> save(@RequestBody Movimiento movimiento) {
+    return ResponseEntity.status(HttpStatus.CREATED).body(service.save(movimiento));
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<Rol> update(@PathVariable Integer id, @RequestBody Rol rol) {
-    rol.setId(id);
-    return ResponseEntity.ok(service.save(rol));
+  public ResponseEntity<Movimiento> update(@PathVariable Integer id, @RequestBody Movimiento movimiento) {
+    movimiento.setId(id);
+    return ResponseEntity.ok(service.save(movimiento));
   }
 
   @DeleteMapping("/{id}")

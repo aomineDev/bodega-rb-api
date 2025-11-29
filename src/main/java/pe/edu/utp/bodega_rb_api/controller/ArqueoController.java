@@ -14,36 +14,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import pe.edu.utp.bodega_rb_api.model.Rol;
-import pe.edu.utp.bodega_rb_api.service.RolService;
+import pe.edu.utp.bodega_rb_api.model.Arqueo;
+import pe.edu.utp.bodega_rb_api.service.ArqueoService;
 
 @RestController
-@RequestMapping("/api/roles")
-public class RolController {
+@RequestMapping("/api/arqueo")
+public class ArqueoController {
   @Autowired
-  private RolService service;
+  private ArqueoService service;
 
   @GetMapping
-  public ResponseEntity<List<Rol>> findAll() {
+  public ResponseEntity<List<Arqueo>> findAll() {
     return ResponseEntity.ok(service.findAll());
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Rol> findById(@PathVariable Integer id) {
+  public ResponseEntity<Arqueo> findById(@PathVariable Integer id) {
     return service.findById(id)
         .map(ResponseEntity::ok)
         .orElseGet(() -> ResponseEntity.notFound().build());
   }
 
   @PostMapping
-  public ResponseEntity<Rol> save(@RequestBody Rol rol) {
-    return ResponseEntity.status(HttpStatus.CREATED).body(service.save(rol));
+  public ResponseEntity<Arqueo> save(@RequestBody Arqueo arqueo) {
+    return ResponseEntity.status(HttpStatus.CREATED).body(service.save(arqueo));
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<Rol> update(@PathVariable Integer id, @RequestBody Rol rol) {
-    rol.setId(id);
-    return ResponseEntity.ok(service.save(rol));
+  public ResponseEntity<Arqueo> update(@PathVariable Integer id, @RequestBody Arqueo arqueo) {
+    arqueo.setId(id);
+    return ResponseEntity.ok(service.save(arqueo));
   }
 
   @DeleteMapping("/{id}")
