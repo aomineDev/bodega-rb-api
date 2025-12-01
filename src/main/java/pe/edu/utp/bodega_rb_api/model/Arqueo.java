@@ -1,7 +1,8 @@
 package pe.edu.utp.bodega_rb_api.model;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,18 +28,13 @@ public class Arqueo {
   private Integer id;
 
   @OneToOne
+  @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "caja_id", nullable = false)
   private Caja caja;
 
   @ManyToOne
   @JoinColumn(name = "cajero_id", nullable = false)
   private Empleado cajero;
-
-  @Column(name = "fecha", nullable = false)
-  private LocalDate fecha;
-
-  @Column(name = "hora", nullable = false)
-  private LocalTime hora;
 
   @Column(name = "total_fisico", nullable = false)
   private Double totalFisico;

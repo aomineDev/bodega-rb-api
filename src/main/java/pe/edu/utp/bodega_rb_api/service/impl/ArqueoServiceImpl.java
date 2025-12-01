@@ -1,7 +1,5 @@
 package pe.edu.utp.bodega_rb_api.service.impl;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,8 +36,6 @@ public class ArqueoServiceImpl implements ArqueoService {
     Caja caja = cajaRepository.findById(entity.getCaja().getId())
         .orElseThrow(() -> new RuntimeException("Caja no encontrada"));
 
-    entity.setFecha(LocalDate.now());
-    entity.setHora(LocalTime.now());
     entity.setTotalSistema(caja.getSaldoActual());
     entity.setDiferencia(entity.getTotalSistema() - entity.getTotalFisico());
     return repository.save(entity);

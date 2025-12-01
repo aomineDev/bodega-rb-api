@@ -7,4 +7,5 @@ import pe.edu.utp.bodega_rb_api.model.Producto;
 public interface ProductoService extends ApiService<Producto> {
   List<Producto> findByCategoria_Id(Integer id);
 
+  void descontarStock(Integer id, Double cantidad);
 }

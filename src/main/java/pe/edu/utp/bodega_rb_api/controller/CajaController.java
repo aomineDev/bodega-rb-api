@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.edu.utp.bodega_rb_api.dto.ResumenCajaDTO;
+import pe.edu.utp.bodega_rb_api.model.Arqueo;
 import pe.edu.utp.bodega_rb_api.model.Caja;
+import pe.edu.utp.bodega_rb_api.repository.ArqueoRepository;
 import pe.edu.utp.bodega_rb_api.service.CajaService;
 import pe.edu.utp.bodega_rb_api.service.ComprobantePdfService;
 
@@ -29,6 +31,9 @@ public class CajaController {
 
   @Autowired
   ComprobantePdfService comprobantePdfService;
+
+  @Autowired
+  ArqueoRepository arqueoRepository;
 
   @GetMapping
   public ResponseEntity<List<Caja>> findAll() {
@@ -86,8 +91,10 @@ public class CajaController {
         .orElseThrow(() -> new RuntimeException("Caja no encontrada con ID: " + id));
 
     ResumenCajaDTO resumenCajaDTO = service.getResumenCaja(id);
+    Arqueo arqueo = arqueoRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Arqueo no encontrada con ID: " + id));
 
-    byte[] pdf = comprobantePdfService.generarPdfCierreCaja(caja, resumenCajaDTO);
+    byte[] pdf = comprobantePdfService.generarPdfCierreCaja(caja, resumenCajaDTO, arqueo);
 
     return ResponseEntity.ok()
         .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=caja_" + id + ".pdf")

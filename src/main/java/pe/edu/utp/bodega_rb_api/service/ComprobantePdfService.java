@@ -14,6 +14,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import pe.edu.utp.bodega_rb_api.dto.ResumenCajaDTO;
+import pe.edu.utp.bodega_rb_api.model.Arqueo;
 import pe.edu.utp.bodega_rb_api.model.Boleta;
 import pe.edu.utp.bodega_rb_api.model.Caja;
 import pe.edu.utp.bodega_rb_api.model.ClienteJuridico;
@@ -81,7 +82,7 @@ public class ComprobantePdfService {
 
     PdfPTable table2 = new PdfPTable(2);
     table2.setWidthPercentage(100);
-    table2.setWidths(new float[] { 2, 1 });
+    table2.setWidths(new float[] { 2, 3 });
 
     table2.addCell(cell("GRAVADO:", Element.ALIGN_LEFT));
     table2.addCell(cell(String.format("S/ %.2f", comprobante.getGrabado()), Element.ALIGN_RIGHT));
@@ -107,7 +108,7 @@ public class ComprobantePdfService {
     return baos.toByteArray();
   }
 
-  public byte[] generarPdfCierreCaja(Caja caja, ResumenCajaDTO resumen) throws Exception {
+  public byte[] generarPdfCierreCaja(Caja caja, ResumenCajaDTO resumen, Arqueo arqueo) throws Exception {
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
     Document document = new Document(new Rectangle(160, 800), 10, 10, 10, 10);
     PdfWriter.getInstance(document, baos);
@@ -127,37 +128,44 @@ public class ComprobantePdfService {
 
     PdfPTable tableVenta = new PdfPTable(2);
     tableVenta.setWidthPercentage(100);
-    tableVenta.setWidths(new float[] { 2, 1 });
+    tableVenta.setWidths(new float[] { 2, 3 });
 
     tableVenta.addCell(cell("Efectivo", Element.ALIGN_LEFT));
-    tableVenta.addCell(cell("S/ " + resumen.getVentasEfectivo(), Element.ALIGN_RIGHT));
+    tableVenta.addCell(cell(String.format("S/ %.2f", resumen.getVentasEfectivo()), Element.ALIGN_RIGHT));
+
     tableVenta.addCell(cell("Tarjeta", Element.ALIGN_LEFT));
-    tableVenta.addCell(cell("S/ " + resumen.getVentasTarjeta(), Element.ALIGN_RIGHT));
+    tableVenta.addCell(cell(String.format("S/ %.2f", resumen.getVentasTarjeta()), Element.ALIGN_RIGHT));
+
     tableVenta.addCell(cell("Yape", Element.ALIGN_LEFT));
-    tableVenta.addCell(cell("S/ " + resumen.getVentasYape(), Element.ALIGN_RIGHT));
+    tableVenta.addCell(cell(String.format("S/ %.2f", resumen.getVentasYape()), Element.ALIGN_RIGHT));
+
     tableVenta.addCell(cell("Plin", Element.ALIGN_LEFT));
-    tableVenta.addCell(cell("S/ " + resumen.getVentasPlin(), Element.ALIGN_RIGHT));
+    tableVenta.addCell(cell(String.format("S/ %.2f", resumen.getVentasPlin()), Element.ALIGN_RIGHT));
 
     document.add(tableVenta);
 
     // DETALLE GENERAL
     document.add(p("-".repeat(23)));
-    document.add(p("DETALLE GENERAL", Element.ALIGN_CENTER));
+    document.add(p("DESGLOSE EFECTIVO", Element.ALIGN_CENTER));
 
     PdfPTable tableGeneral = new PdfPTable(2);
     tableGeneral.setWidthPercentage(100);
-    tableGeneral.setWidths(new float[] { 2, 1 });
+    tableGeneral.setWidths(new float[] { 2, 3 });
 
     tableGeneral.addCell(cell("Apertura", Element.ALIGN_LEFT));
-    tableGeneral.addCell(cell("S/ " + resumen.getApertura(), Element.ALIGN_RIGHT));
+    tableGeneral.addCell(cell("S/ " + String.format("%.2f", resumen.getApertura()), Element.ALIGN_RIGHT));
+
     tableGeneral.addCell(cell("Ventas Efectivo", Element.ALIGN_LEFT));
-    tableGeneral.addCell(cell("S/ " + resumen.getVentasEfectivo(), Element.ALIGN_RIGHT));
+    tableGeneral.addCell(cell("S/ " + String.format("%.2f", resumen.getVentasEfectivo()), Element.ALIGN_RIGHT));
+
     tableGeneral.addCell(cell("Ingresos", Element.ALIGN_LEFT));
-    tableGeneral.addCell(cell("S/ " + resumen.getIngresos(), Element.ALIGN_RIGHT));
+    tableGeneral.addCell(cell("S/ " + String.format("%.2f", resumen.getIngresos()), Element.ALIGN_RIGHT));
+
     tableGeneral.addCell(cell("Egresos Vuelto", Element.ALIGN_LEFT));
-    tableGeneral.addCell(cell("S/ " + resumen.getEgresosVuelto(), Element.ALIGN_RIGHT));
+    tableGeneral.addCell(cell("S/ " + String.format("%.2f", resumen.getEgresosVuelto()), Element.ALIGN_RIGHT));
+
     tableGeneral.addCell(cell("Egresos Retiro", Element.ALIGN_LEFT));
-    tableGeneral.addCell(cell("S/ " + resumen.getEgresosRetiro(), Element.ALIGN_RIGHT));
+    tableGeneral.addCell(cell("S/ " + String.format("%.2f", resumen.getEgresosRetiro()), Element.ALIGN_RIGHT));
 
     document.add(tableGeneral);
 
@@ -167,36 +175,39 @@ public class ComprobantePdfService {
 
     PdfPTable tableCuadre = new PdfPTable(2);
     tableCuadre.setWidthPercentage(100);
-    tableCuadre.setWidths(new float[] { 2, 1 });
+    tableCuadre.setWidths(new float[] { 2, 3 });
 
     tableCuadre.addCell(cell("Ingresos Totales", Element.ALIGN_LEFT));
-    tableCuadre.addCell(cell("S/ " + resumen.getIngresosTotales(), Element.ALIGN_RIGHT));
+    tableCuadre.addCell(cell("S/ " + String.format("%.2f", resumen.getIngresosTotales()), Element.ALIGN_RIGHT));
+
     tableCuadre.addCell(cell("Egresos Totales", Element.ALIGN_LEFT));
-    tableCuadre.addCell(cell("S/ " + resumen.getEgresosTotales(), Element.ALIGN_RIGHT));
+    tableCuadre.addCell(cell("S/ " + String.format("%.2f", resumen.getEgresosTotales()), Element.ALIGN_RIGHT));
+
     tableCuadre.addCell(cell("Saldo Calculado", Element.ALIGN_LEFT));
-    tableCuadre.addCell(cell("S/ " + resumen.getSaldoCalculado(), Element.ALIGN_RIGHT));
+    tableCuadre.addCell(cell("S/ " + String.format("%.2f", resumen.getSaldoCalculado()), Element.ALIGN_RIGHT));
 
     document.add(tableCuadre);
 
     // DETALLE DE CUADRE FINAL
     document.add(p("-".repeat(23)));
+    document.add(p("ARQUEO", Element.ALIGN_CENTER));
 
     PdfPTable tableFinal = new PdfPTable(2);
     tableFinal.setWidthPercentage(100);
-    tableFinal.setWidths(new float[] { 2, 1 });
+    tableFinal.setWidths(new float[] { 2, 3 });
 
     tableFinal.addCell(cell("TOTAL EFECTIVO EN CAJA", Element.ALIGN_LEFT));
-    tableFinal.addCell(cell("S/ " + resumen.getSaldoCalculado(), Element.ALIGN_RIGHT));
-    tableFinal.addCell(cell("TOTAL CTA BANCARIA", Element.ALIGN_LEFT));
-    tableFinal.addCell(cell("S/ " + resumen.getVentasElectronicas(), Element.ALIGN_RIGHT));
-    tableFinal.addCell(cell("TOTAL CUADRE", Element.ALIGN_LEFT));
-    tableFinal
-        .addCell(cell("S/ " + (resumen.getSaldoCalculado() + resumen.getVentasElectronicas()), Element.ALIGN_RIGHT));
+    tableFinal.addCell(cell("S/ " + String.format("%.2f", arqueo.getTotalFisico()), Element.ALIGN_RIGHT));
+
+    tableFinal.addCell(cell("DIFERENCIA", Element.ALIGN_LEFT));
+    tableFinal.addCell(cell("S/ " + String.format("%.2f", arqueo.getDiferencia()), Element.ALIGN_RIGHT));
 
     document.add(tableFinal);
 
+    document.add(p("OBSERVACIONES: " + arqueo.getObservaciones(), Element.ALIGN_LEFT));
+
     document.add(p("-".repeat(23)));
-    document.add(p("GRACIAS POR SU COMPRA", Element.ALIGN_CENTER));
+    document.add(p("GUARDE ESTE COMPROBANTE", Element.ALIGN_CENTER));
 
     document.close();
     return baos.toByteArray();

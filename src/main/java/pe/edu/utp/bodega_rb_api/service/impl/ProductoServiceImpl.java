@@ -41,4 +41,9 @@ public class ProductoServiceImpl implements ProductoService {
     productoRepository.deleteById(id);
   }
 
+  @Override
+  public void descontarStock(Integer id, Double cantidad) {
+    productoRepository.descontarStock(id, cantidad);
+  }
+
 }
