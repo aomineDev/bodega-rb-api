@@ -53,8 +53,6 @@ public class SecurityConfig {
             .requestMatchers("/api/auth/login", "/api/auth/logout", "/api/storage/**", "/storage/**").permitAll()
             .requestMatchers("/api/inventarios")
             .hasAnyRole(RolEnum.ADMINISTRADOR.toString(), RolEnum.JEFE_ALMACEN.toString(), RolEnum.ASISTENTE.toString())
-            .requestMatchers("/api/proveedores")
-            .hasAnyRole(RolEnum.ADMINISTRADOR.toString(), RolEnum.ASISTENTE.toString(), RolEnum.JEFE_ALMACEN.toString())
             .anyRequest().authenticated())
         .exceptionHandling(ex -> ex
             .authenticationEntryPoint(this::authenticationEntryPoint)

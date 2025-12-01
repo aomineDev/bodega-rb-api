@@ -18,12 +18,10 @@ public class RolServiceImpl implements RolService {
   @Override
   public List<Rol> findAll() {
     return rolRepository.findAll();
-
   }
 
   @Override
   public Optional<Rol> findById(Integer id) {
-
     return rolRepository.findById(id);
   }
 
@@ -36,5 +34,4 @@ public class RolServiceImpl implements RolService {
   public void deleteById(Integer id) {
     rolRepository.deleteById(id);
   }
-
 }
