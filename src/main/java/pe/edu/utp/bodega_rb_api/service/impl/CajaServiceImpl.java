@@ -12,7 +12,6 @@ import pe.edu.utp.bodega_rb_api.dto.ResumenCajaDTO;
 import pe.edu.utp.bodega_rb_api.model.Caja;
 import pe.edu.utp.bodega_rb_api.repository.CajaRepository;
 import pe.edu.utp.bodega_rb_api.repository.ComprobanteRepository;
-import pe.edu.utp.bodega_rb_api.repository.EmpleadoRepository;
 import pe.edu.utp.bodega_rb_api.repository.MovimientoRepository;
 import pe.edu.utp.bodega_rb_api.service.CajaService;
 
@@ -26,9 +25,6 @@ public class CajaServiceImpl implements CajaService {
 
   @Autowired
   private ComprobanteRepository comprobanteRepository;
-
-  @Autowired
-  private EmpleadoRepository empleadoRepository;
 
   @Override
   public List<Caja> findAll() {

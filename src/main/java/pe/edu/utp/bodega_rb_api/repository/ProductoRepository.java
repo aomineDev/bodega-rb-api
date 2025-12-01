@@ -10,4 +10,6 @@ import pe.edu.utp.bodega_rb_api.model.Producto;
 @Repository
 public interface ProductoRepository extends JpaRepository<Producto, Integer> {
   List<Producto> findByCategoria_Id(Integer id);
+
+  List<Producto> findByStockLessThan(Double stock);
 }
