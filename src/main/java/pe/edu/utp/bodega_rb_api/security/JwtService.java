@@ -41,7 +41,6 @@ public class JwtService {
     } catch (Exception e) {
       return false;
     }
-
   }
 
   public String extractUsername(String token) {

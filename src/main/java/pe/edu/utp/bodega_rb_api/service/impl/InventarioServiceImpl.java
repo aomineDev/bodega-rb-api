@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import pe.edu.utp.bodega_rb_api.exception.ResourceNotFoundException;
 import pe.edu.utp.bodega_rb_api.model.Empleado;
 import pe.edu.utp.bodega_rb_api.model.Inventario;
 import pe.edu.utp.bodega_rb_api.model.InventarioDetalle;
@@ -97,7 +98,7 @@ public class InventarioServiceImpl implements InventarioService {
   @Override
   public void deleteById(Integer id) {
     this.findById(id)
-        .orElseThrow(() -> new RuntimeException("Inventario con id: " + id + " no encontrado"));
+        .orElseThrow(() -> new ResourceNotFoundException("Inventario con id: " + id + " no encontrado"));
 
     repository.deleteById(id);
   }

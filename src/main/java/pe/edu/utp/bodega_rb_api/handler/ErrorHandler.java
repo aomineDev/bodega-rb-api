@@ -10,7 +10,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import io.jsonwebtoken.JwtException;
 import pe.edu.utp.bodega_rb_api.dto.ErrorResponse;
+import pe.edu.utp.bodega_rb_api.exception.ResourceNotFoundException;
 
 @ControllerAdvice
 public class ErrorHandler {
@@ -39,6 +41,24 @@ public class ErrorHandler {
     return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
         .body(new ErrorResponse("Invalid credentials", "usuario o contraseña incorrectos",
             HttpStatus.UNAUTHORIZED.value()));
+  }
+
+  @ExceptionHandler(JwtException.class)
+  public ResponseEntity<ErrorResponse> handleJWTException(JwtException ex) {
+    return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+        .body(new ErrorResponse("Invalid token", "Token invalido", HttpStatus.UNAUTHORIZED.value()));
+  }
+
+  @ExceptionHandler(ResourceNotFoundException.class)
+  public ResponseEntity<ErrorResponse> handleResourceNotFoundException(ResourceNotFoundException ex) {
+    return ResponseEntity.status(HttpStatus.NOT_FOUND)
+        .body(new ErrorResponse("Resource not found", ex.getMessage(), HttpStatus.NOT_FOUND.value()));
+  }
+
+  @ExceptionHandler(NullPointerException.class)
+  public ResponseEntity<ErrorResponse> handleNullPointerException(NullPointerException ex) {
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+        .body(new ErrorResponse("Null pointer exception", ex.getMessage(), HttpStatus.BAD_REQUEST.value()));
   }
 
   @ExceptionHandler(RuntimeException.class)

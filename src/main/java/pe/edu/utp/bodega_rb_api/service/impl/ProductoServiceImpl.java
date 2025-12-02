@@ -1,5 +1,6 @@
 package pe.edu.utp.bodega_rb_api.service.impl;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +35,24 @@ public class ProductoServiceImpl implements ProductoService {
   @Override
   public Producto save(Producto entity) {
     return productoRepository.save(entity);
+  }
+
+  @Override
+  public Optional<Producto> updateStockById(Integer id, Double stock) {
+    return productoRepository.findById(id).map(producto -> {
+      producto.setStock(stock);
+      return productoRepository.save(producto);
+    });
+  }
+
+  @Override
+  public Optional<Producto> updateOfferById(Integer id, Double precio, LocalDate fechaFin) {
+    return productoRepository.findById(id).map(producto -> {
+      producto.setPrecioPromocion(precio);
+      producto.setInicioPromocion(LocalDate.now());
+      producto.setFinPromocion(fechaFin);
+      return productoRepository.save(producto);
+    });
   }
 
   @Override
