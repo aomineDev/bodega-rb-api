@@ -65,4 +65,9 @@ public class ProductoServiceImpl implements ProductoService {
     productoRepository.descontarStock(id, cantidad);
   }
 
+  @Override
+  public void agregarStock(Integer id, Double cantidad) {
+    productoRepository.agregarStock(id, cantidad);
+  }
+
 }

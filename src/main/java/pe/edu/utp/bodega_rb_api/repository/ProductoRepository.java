@@ -22,4 +22,9 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
   @Query("UPDATE Producto p SET p.stock = p.stock - :cantidad WHERE p.id = :id")
   void descontarStock(@Param("id") Integer id, @Param("cantidad") Double cantidad);
 
+  @Transactional
+  @Modifying
+  @Query("UPDATE Producto p SET p.stock = p.stock + :cantidad WHERE p.id = :id")
+  void agregarStock(@Param("id") Integer id, @Param("cantidad") Double cantidad);
+
 }

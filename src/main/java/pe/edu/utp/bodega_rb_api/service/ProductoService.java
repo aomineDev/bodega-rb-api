@@ -14,4 +14,6 @@ public interface ProductoService extends ApiService<Producto> {
   Optional<Producto> updateStockById(Integer id, Double stock);
 
   void descontarStock(Integer id, Double cantidad);
+
+  void agregarStock(Integer id, Double cantidad);
 }

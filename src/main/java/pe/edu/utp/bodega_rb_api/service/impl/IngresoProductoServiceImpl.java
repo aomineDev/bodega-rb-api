@@ -9,11 +9,15 @@ import org.springframework.stereotype.Service;
 import pe.edu.utp.bodega_rb_api.model.IngresoProducto;
 import pe.edu.utp.bodega_rb_api.repository.IngresoProductoRepository;
 import pe.edu.utp.bodega_rb_api.service.IngresoProductoService;
+import pe.edu.utp.bodega_rb_api.service.ProductoService;
 
 @Service
 public class IngresoProductoServiceImpl implements IngresoProductoService {
   @Autowired
   private IngresoProductoRepository repository;
+
+  @Autowired
+  private ProductoService productoService;
 
   @Override
   public List<IngresoProducto> findAll() {
@@ -27,7 +31,18 @@ public class IngresoProductoServiceImpl implements IngresoProductoService {
 
   @Override
   public IngresoProducto save(IngresoProducto entity) {
-    return repository.save(entity);
+    IngresoProducto saved = repository.save(entity);
+
+    // Solo sumar stock cuando se apruebe
+    if ("Aprobado".equals(entity.getEstado())) {
+      saved.getDetalleIngresos().forEach(det -> {
+        productoService.agregarStock(
+            det.getProducto().getId(),
+            det.getCantidad());
+      });
+    }
+
+    return saved;
   }
 
   @Override
