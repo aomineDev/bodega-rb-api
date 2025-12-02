@@ -23,7 +23,7 @@ public class DetalleIngreso {
   private String lote;
 
   @Column(name = "cantidad", nullable = false)
-  private Integer cantidad;
+  private Double cantidad;
 
   @Column(name = "precio_compra", nullable = false)
   private Double precioCompra;

@@ -8,4 +8,6 @@ public interface ProductoService extends ApiService<Producto> {
   List<Producto> findByCategoria_Id(Integer id);
 
   void descontarStock(Integer id, Double cantidad);
+
+  void agregarStock(Integer id, Double cantidad);
 }
